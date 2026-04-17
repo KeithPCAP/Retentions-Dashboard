@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>CAP Daily Case Report</title>
+    <style>
+        :root {
+            --cap-gold: #FDD835; 
+            --cap-black: #1A1A1A;
+            --cap-grey: #F4F4F4;
+            --status-red: #D32F2F;
+            --status-amber: #FFB300;
+            --status-blue: #0288D1;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--cap-grey);
+            margin: 0;
+            padding: 20px 15px; /* Reduced padding for mobile */
+            color: var(--cap-black);
+        }
+
+        .dashboard-wrapper {
+            max-width: 900px;
+            margin: 0 auto;
+            background: var(--white);
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            overflow: hidden;
+            border: 1px solid #ddd;
+        }
+
+        /* Header */
+        .header {
+            background-color: var(--cap-black);
+            color: var(--white);
+            padding: 25px 15px;
+            text-align: center;
+            border-bottom: 6px solid var(--cap-gold);
+        }
+
+        .header h1 { margin: 0; font-size: 20px; letter-spacing: 2px; text-transform: uppercase; }
+        .header p { margin: 5px 0 0; opacity: 0.7; font-size: 13px; }
+
+        /* Total Summary Bar */
+        .total-banner {
+            background-color: var(--cap-gold);
+            padding: 15px;
+            text-align: center;
+            font-weight: 800;
+            font-size: 16px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+            color: var(--cap-black);
+        }
+
+        .total-count {
+            background: var(--cap-black);
+            color: var(--cap-gold);
+            padding: 4px 15px;
+            border-radius: 20px;
+            font-size: 20px;
+        }
+
+        /* Responsive Grid */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            padding: 20px;
+        }
+
+        /* Interactive Cards */
+        .card {
+            background: var(--white);
+            border: 1px solid #eee;
+            border-radius: 12px;
+            padding: 20px;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+        }
+
+        /* Only apply hover scale on devices that use a mouse */
+        @media (hover: hover) {
+            .card:hover {
+                transform: scale(1.03);
+                box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+                border-color: var(--cap-gold);
+            }
+        }
+
+        .card-label {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: #888;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        .card-number {
+            font-size: 38px;
+            font-weight: 800;
+            margin: 5px 0;
+        }
+
+        .card-desc {
+            font-size: 13px;
+            color: #555;
+            line-height: 1.4;
+        }
+
+        /* Action Button Section */
+        .action-container {
+            padding: 0 20px 30px;
+            text-align: center;
+        }
+
+        .btn-spreadsheet {
+            display: inline-block;
+            background-color: var(--cap-black);
+            color: var(--cap-gold);
+            text-decoration: none;
+            padding: 18px 30px;
+            border-radius: 50px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: 2px solid var(--cap-gold);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            width: 80%; /* Mobile optimized width */
+            max-width: 300px;
+        }
+
+        .btn-spreadsheet:active {
+            transform: scale(0.95);
+            background-color: var(--cap-gold);
+            color: var(--cap-black);
+        }
+
+        /* Priority Colors */
+        .red-text { color: var(--status-red); }
+        .amber-text { color: var(--status-amber); }
+        .blue-text { color: var(--status-blue); }
+
+        .indicator {
+            height: 4px;
+            width: 30px;
+            border-radius: 2px;
+            margin-bottom: 12px;
+        }
+        .bg-red { background: var(--status-red); }
+        .bg-amber { background: var(--status-amber); }
+        .bg-blue { background: var(--status-blue); }
+
+        /* Mobile Specific Adjustment */
+        @media (max-width: 600px) {
+            .grid {
+                grid-template-columns: 1fr; /* Force stack */
+            }
+            .header h1 { font-size: 18px; }
+            .card-number { font-size: 34px; }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="dashboard-wrapper">
+        <div class="header">
+            <h1>Daily Case Report</h1>
+            <p>Retentions Department Update</p>
+        </div>
+
+        <div class="total-banner">
+            CURRENT LOAD: <span class="total-count">135</span>
+        </div>
+
+        <div class="grid">
+            <div class="card">
+                <div class="indicator bg-red"></div>
+                <span class="card-label">Critical Backlog</span>
+                <div class="card-number red-text">39</div>
+                <div class="card-desc">High-priority cases from <strong>March</strong>. Requires immediate attention.</div>
+            </div>
+
+            <div class="card">
+                <div class="indicator bg-amber"></div>
+                <span class="card-label">Active Queue</span>
+                <div class="card-number amber-text">42</div>
+                <div class="card-desc">Medium-priority <strong>April</strong> cases currently under review.</div>
+            </div>
+
+            <div class="card">
+                <div class="indicator bg-blue"></div>
+                <span class="card-label">New Intake</span>
+                <div class="card-number blue-text">54</div>
+                <div class="card-desc">Recent submissions or cases awaiting <strong>client feedback</strong>.</div>
+            </div>
+        </div>
+
+        <div class="action-container">
+            <a href="https://capadmin-my.sharepoint.com/:x:/r/personal/keithp_capcommunity_co_za/_layouts/15/Doc.aspx?sourcedoc=%7B649d105d-1051-4d25-bd7b-2b36061bec76%7D&action=edit&wdenableroaming=1&wdodb=1&wdlcid=en-US&wdorigin=BrowserReload&wdredirectionreason=Force_SingleStepBoot&wdinitialsession=f4b89d11-f441-ee3e-bb99-11070449f366&wdrldsc=2&wdrldc=1&wdrldr=RefreshingExpiredAccessToken" class="btn-spreadsheet">Access Cases to Close</a>
+        </div>
+    </div>
+
+</body>
+</html>
